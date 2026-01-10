@@ -4,6 +4,7 @@ export const THEME = {
   // ========== TEMAS CLAROS ==========
   
   light: {
+    
     // Tema claro original
     bg: "#eff0f3",        
     card: "#ffffff",      
@@ -12,7 +13,7 @@ export const THEME = {
     button: "#ff8e3c",    
     buttonText: "#0d0d0d",
     stroke: "#0d0d0d",    
-    secondary: "#ffffff",
+    secondary: "#ecc17c",
     tertiary: "#ff8e3c",
   },
   
