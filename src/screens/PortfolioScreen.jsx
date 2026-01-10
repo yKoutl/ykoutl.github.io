@@ -12,6 +12,12 @@ import AIChatWidget from '../components/common/AIChatWidget';
 
 const PortfolioScreen = () => {
   const [darkMode, setDarkMode] = useState(true);
+  const [lightTheme, setLightTheme] = useState(() => {
+    return localStorage.getItem('lightTheme') || 'light';
+  });
+  const [darkTheme, setDarkTheme] = useState(() => {
+    return localStorage.getItem('darkTheme') || 'darkOrange';
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   
@@ -25,12 +31,18 @@ const PortfolioScreen = () => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = THEME.dark.bg;
+      document.body.style.backgroundColor = THEME[darkTheme].bg;
     } else {
       document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = THEME.light.bg;
+      document.body.style.backgroundColor = THEME[lightTheme].bg;
     }
-  }, [darkMode]);
+  }, [darkMode, darkTheme, lightTheme]);
+
+  // Guardar preferencias de temas
+  useEffect(() => {
+    localStorage.setItem('lightTheme', lightTheme);
+    localStorage.setItem('darkTheme', darkTheme);
+  }, [lightTheme, darkTheme]);
 
   // Recargar datos cuando cambie localStorage
   useEffect(() => {
@@ -54,13 +66,18 @@ const PortfolioScreen = () => {
     }
   };
 
-  const bgStyle = { backgroundColor: darkMode ? THEME.dark.bg : THEME.light.bg };
+  const currentTheme = darkMode ? THEME[darkTheme] : THEME[lightTheme];
+  const bgStyle = { backgroundColor: currentTheme.bg };
 
   return (
     <div className="min-h-screen transition-colors duration-300 font-sans" style={bgStyle}>
       <Navbar 
         darkMode={darkMode} 
         setDarkMode={setDarkMode}
+        lightTheme={lightTheme}
+        setLightTheme={setLightTheme}
+        darkTheme={darkTheme}
+        setDarkTheme={setDarkTheme}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
         activeSection={activeSection}
@@ -68,14 +85,14 @@ const PortfolioScreen = () => {
         alias={data.profile.alias}
       />
       
-      <Hero darkMode={darkMode} profile={data.profile} scrollToSection={scrollToSection} />
-      <About darkMode={darkMode} profile={data.profile} skills={data.skills} />
-      <Experience darkMode={darkMode} experience={data.experience} />
-      <Projects darkMode={darkMode} projects={data.projects} />
-      <Contact darkMode={darkMode} profile={data.profile} />
-      <Footer darkMode={darkMode} name={data.profile.name} />
+      <Hero darkMode={darkMode} profile={data.profile} scrollToSection={scrollToSection} currentTheme={currentTheme} />
+      <About darkMode={darkMode} profile={data.profile} skills={data.skills} currentTheme={currentTheme} />
+      <Experience darkMode={darkMode} experience={data.experience} currentTheme={currentTheme} />
+      <Projects darkMode={darkMode} projects={data.projects} currentTheme={currentTheme} />
+      <Contact darkMode={darkMode} profile={data.profile} currentTheme={currentTheme} />
+      <Footer darkMode={darkMode} name={data.profile.name} currentTheme={currentTheme} />
       
-      <AIChatWidget darkMode={darkMode} data={data} />
+      <AIChatWidget darkMode={darkMode} data={data} currentTheme={currentTheme} />
     </div>
   );
 };

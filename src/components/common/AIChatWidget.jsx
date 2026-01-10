@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, Bot, Send, Sparkles, Loader2 } from 'lucide-react';
 import { THEME } from '../../constants/theme';
 
-const AIChatWidget = ({ darkMode, data }) => {
+const AIChatWidget = ({ darkMode, data, currentTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', text: '¡Hola! Soy el asistente virtual de Raul. Pregúntame sobre sus proyectos, habilidades o experiencia. ✨' }
@@ -12,8 +12,8 @@ const AIChatWidget = ({ darkMode, data }) => {
   const [userApiKey, setUserApiKey] = useState('');
   const [showKeyInput, setShowKeyInput] = useState(false);
   const messagesEndRef = useRef(null);
-
-  const currentTheme = darkMode ? THEME.dark : THEME.light;
+  
+  const theme = currentTheme || (darkMode ? THEME.dark : THEME.light);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -78,9 +78,9 @@ const AIChatWidget = ({ darkMode, data }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 p-4 rounded-full shadow-2xl transition-all hover:scale-110 z-50 flex items-center justify-center"
         style={{ 
-          backgroundColor: currentTheme.button, 
-          color: currentTheme.buttonText,
-          boxShadow: `0 0 20px ${currentTheme.button}60`
+          backgroundColor: theme.button, 
+          color: theme.buttonText,
+          boxShadow: `0 0 20px ${theme.button}60`
         }}
       >
         {isOpen ? <X size={24} /> : <Bot size={24} />}
@@ -90,21 +90,21 @@ const AIChatWidget = ({ darkMode, data }) => {
         <div 
           className="fixed bottom-24 right-6 w-80 md:w-96 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col border transition-all animate-in slide-in-from-bottom-10 fade-in duration-300"
           style={{ 
-            backgroundColor: currentTheme.card, 
-            borderColor: darkMode ? `${THEME.dark.paragraph}20` : '#e5e7eb',
+            backgroundColor: theme.card, 
+            borderColor: `${theme.paragraph}20`,
             height: '500px',
             maxHeight: '80vh'
           }}
         >
           {/* Header */}
           <div className="p-4 flex items-center gap-3 border-b" 
-               style={{ backgroundColor: darkMode ? THEME.dark.bg : THEME.light.bg, borderColor: darkMode ? `${THEME.dark.paragraph}20` : '#e5e7eb' }}>
-            <div className="p-2 rounded-full" style={{ backgroundColor: `${currentTheme.button}20` }}>
-              <Sparkles size={18} style={{ color: currentTheme.button }} />
+               style={{ backgroundColor: theme.bg, borderColor: `${theme.paragraph}20` }}>
+            <div className="p-2 rounded-full" style={{ backgroundColor: `${theme.button}20` }}>
+              <Sparkles size={18} style={{ color: theme.button }} />
             </div>
             <div>
-              <h3 className="font-bold text-sm" style={{ color: currentTheme.headline }}>Asistente IA</h3>
-              <p className="text-xs opacity-70" style={{ color: currentTheme.paragraph }}>Powered by Gemini</p>
+              <h3 className="font-bold text-sm" style={{ color: theme.headline }}>Asistente IA</h3>
+              <p className="text-xs opacity-70" style={{ color: theme.paragraph }}>Powered by Gemini</p>
             </div>
           </div>
 
@@ -129,8 +129,8 @@ const AIChatWidget = ({ darkMode, data }) => {
                 <div 
                   className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user' ? 'rounded-tr-none' : 'rounded-tl-none'}`}
                   style={{ 
-                    backgroundColor: msg.role === 'user' ? currentTheme.button : (darkMode ? THEME.dark.bg : '#f3f4f6'),
-                    color: msg.role === 'user' ? currentTheme.buttonText : (darkMode ? THEME.dark.paragraph : THEME.light.paragraph)
+                    backgroundColor: msg.role === 'user' ? theme.button : theme.bg,
+                    color: msg.role === 'user' ? theme.buttonText : theme.paragraph
                   }}
                 >
                   {msg.text}
@@ -142,7 +142,7 @@ const AIChatWidget = ({ darkMode, data }) => {
           </div>
 
           {/* Input */}
-          <div className="p-3 border-t" style={{ borderColor: darkMode ? `${THEME.dark.paragraph}20` : '#e5e7eb' }}>
+          <div className="p-3 border-t" style={{ borderColor: `${theme.paragraph}20` }}>
             <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-2">
               <input
                 type="text"
@@ -151,16 +151,16 @@ const AIChatWidget = ({ darkMode, data }) => {
                 placeholder="Pregunta algo..."
                 className="flex-1 p-2 rounded-lg text-sm focus:outline-none focus:ring-2"
                 style={{ 
-                  backgroundColor: darkMode ? THEME.dark.bg : '#f9fafb',
-                  color: currentTheme.paragraph,
-                  '--tw-ring-color': currentTheme.button
+                  backgroundColor: theme.bg,
+                  color: theme.paragraph,
+                  '--tw-ring-color': theme.button
                 }}
               />
               <button 
                 type="submit"
                 disabled={isLoading || !input.trim()}
                 className="p-2 rounded-lg transition-colors disabled:opacity-50"
-                style={{ backgroundColor: currentTheme.button, color: currentTheme.buttonText }}
+                style={{ backgroundColor: theme.button, color: theme.buttonText }}
               >
                 <Send size={18} />
               </button>

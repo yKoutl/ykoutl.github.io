@@ -2,16 +2,17 @@ import React from "react";
 import { Code2, Mail, Download, ChevronDown, Github } from "lucide-react";
 import { THEME } from "../../constants/theme";
 
-const Hero = ({ darkMode, profile, scrollToSection }) => {
+const Hero = ({ darkMode, profile, scrollToSection, currentTheme }) => {
+  const theme = currentTheme || (darkMode ? THEME.dark : THEME.light);
   const textHeadStyle = {
-    color: darkMode ? THEME.dark.headline : THEME.light.headline,
+    color: theme.headline,
   };
   const textParaStyle = {
-    color: darkMode ? THEME.dark.paragraph : THEME.light.paragraph,
+    color: theme.paragraph,
   };
   const btnStyle = {
-    backgroundColor: darkMode ? THEME.dark.button : THEME.light.button,
-    color: darkMode ? THEME.dark.buttonText : THEME.light.buttonText,
+    backgroundColor: theme.button,
+    color: theme.buttonText,
   };
 
   return (
@@ -23,13 +24,9 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
         <div
           className="inline-block p-2 px-4 rounded-full font-semibold text-sm mb-6 animate-fade-in-up border"
           style={{
-            backgroundColor: darkMode
-              ? `${THEME.dark.button}20`
-              : `${THEME.light.button}10`,
-            color: darkMode ? THEME.dark.button : THEME.light.button,
-            borderColor: darkMode
-              ? `${THEME.dark.button}40`
-              : `${THEME.light.button}20`,
+            backgroundColor: `${theme.button}20`,
+            color: theme.button,
+            borderColor: `${theme.button}40`,
           }}
         >
           Hola, bienvenido a mi portafolio
@@ -43,9 +40,7 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
           <span
             className="text-transparent bg-clip-text"
             style={{
-              backgroundImage: `linear-gradient(to right, ${
-                darkMode ? THEME.dark.button : THEME.light.button
-              }, ${darkMode ? THEME.dark.secondary : THEME.light.button})`,
+              backgroundImage: `linear-gradient(to right, ${theme.button}, ${theme.secondary || theme.button})`,
             }}
           >
             {profile.name}
@@ -74,10 +69,8 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
             download
             className="px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-lg border hover:translate-y-[-2px]"
             style={{
-              backgroundColor: darkMode
-                ? THEME.dark.card
-                : THEME.light.headline,
-              color: darkMode ? THEME.dark.headline : THEME.light.bg,
+              backgroundColor: theme.card,
+              color: theme.headline,
               borderColor: "transparent",
             }}
           >
@@ -90,10 +83,8 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
             rel="noopener noreferrer"
             className="px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-lg border hover:translate-y-[-2px]"
             style={{
-              backgroundColor: darkMode
-                ? THEME.dark.card
-                : THEME.light.headline,
-              color: darkMode ? THEME.dark.headline : THEME.light.bg,
+              backgroundColor: theme.card,
+              color: theme.headline,
               borderColor: "transparent",
             }}
           >
@@ -106,8 +97,8 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
             className="px-8 py-3.5 rounded-lg font-semibold border transition-all flex items-center justify-center gap-2 hover:bg-opacity-5"
             style={{
               backgroundColor: "transparent",
-              borderColor: darkMode ? THEME.dark.paragraph : "#ccc",
-              color: darkMode ? THEME.dark.headline : THEME.light.headline,
+              borderColor: theme.paragraph,
+              color: theme.headline,
             }}
           >
             <Mail size={20} />
@@ -118,7 +109,7 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
         <div
           className="mt-16 animate-bounce cursor-pointer"
           style={{
-            color: darkMode ? THEME.dark.paragraph : THEME.light.paragraph,
+            color: theme.paragraph,
           }}
           onClick={() => scrollToSection("about")}
         >
@@ -130,8 +121,9 @@ const Hero = ({ darkMode, profile, scrollToSection }) => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
         width="100%"
-  className="-mt-1 sm:-mt-36"      >
-        <path fill="#ff8906">
+        className="-mt-1 sm:-mt-36"
+      >
+        <path fill={theme.button}>
           <animate
             attributeName="d"
             dur="6s"

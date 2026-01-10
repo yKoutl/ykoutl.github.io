@@ -1,15 +1,17 @@
 import React from 'react';
 import { THEME } from '../../constants/theme';
 
-const Footer = ({ darkMode, name }) => {
+const Footer = ({ darkMode, name, currentTheme }) => {
+  const theme = currentTheme || (darkMode ? THEME.dark : THEME.light);
+  
   return (
     <footer className="py-8 text-center border-t" 
             style={{ 
-              backgroundColor: darkMode ? THEME.dark.bg : THEME.light.bg, 
-              borderColor: darkMode ? `${THEME.dark.paragraph}20` : '#e5e7eb' 
+              backgroundColor: theme.bg, 
+              borderColor: `${theme.paragraph}20`
             }}>
       <p className="text-sm opacity-60" 
-         style={{ color: darkMode ? THEME.dark.paragraph : THEME.light.paragraph }}>
+         style={{ color: theme.paragraph }}>
         © {new Date().getFullYear()} {name}. Creado con React & Tailwind CSS.
       </p>
     </footer>

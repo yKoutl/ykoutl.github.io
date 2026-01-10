@@ -4,12 +4,13 @@ import { THEME } from '../../constants/theme';
 import SectionTitle from '../common/SectionTitle';
 import Card from '../common/Card';
 
-const About = ({ darkMode, profile, skills }) => {
-  const textHeadStyle = { color: darkMode ? THEME.dark.headline : THEME.light.headline };
-  const textParaStyle = { color: darkMode ? THEME.dark.paragraph : THEME.light.paragraph };
+const About = ({ darkMode, profile, skills, currentTheme }) => {
+  const theme = currentTheme || (darkMode ? THEME.dark : THEME.light);
+  const textHeadStyle = { color: theme.headline };
+  const textParaStyle = { color: theme.paragraph };
 
   return (
-    <section id="about" className="py-16" style={{ backgroundColor: darkMode ? `${THEME.dark.card}50` : `${THEME.light.card}50` }}>
+    <section id="about" className="py-16" style={{ backgroundColor: `${theme.card}50` }}>
      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle id="about-title" darkMode={darkMode}>Sobre Mí & Habilidades</SectionTitle>
@@ -17,12 +18,12 @@ const About = ({ darkMode, profile, skills }) => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* About Text */}
           <div>
-            <div className="flex items-center gap-2 mb-4 font-bold uppercase tracking-wider text-sm" style={{ color: darkMode ? THEME.dark.button : THEME.light.button }}>
+            <div className="flex items-center gap-2 mb-4 font-bold uppercase tracking-wider text-sm" style={{ color: theme.button }}>
               <User size={18} />
               <span>Perfil Profesional</span>
             </div>
             <h3 className="text-3xl font-bold mb-6 leading-tight" style={textHeadStyle}>
-              Construyendo el puente entre <span style={{ color: darkMode ? THEME.dark.button : THEME.light.button }}>Datos</span> e Infraestructura.
+              Construyendo el puente entre <span style={{ color: currentTheme.button }}>Datos</span> e Infraestructura.
             </h3>
             <p className="text-lg leading-relaxed mb-6" style={textParaStyle}>
               {profile.about}
@@ -35,7 +36,7 @@ const About = ({ darkMode, profile, skills }) => {
               ].map((item, i) => (
                 <a key={i} href={item.link} target="_blank" rel="noopener noreferrer" 
                    className="p-2 rounded-full transition-colors hover:opacity-80"
-                   style={{ backgroundColor: darkMode ? THEME.dark.card : THEME.light.card, color: darkMode ? THEME.dark.button : THEME.light.button }}>
+                   style={{ backgroundColor: theme.card, color: theme.button }}>
                   {item.icon}
                 </a>
               ))}
@@ -45,9 +46,9 @@ const About = ({ darkMode, profile, skills }) => {
           {/* Skills Grid */}
           <div className="grid gap-6">
             {skills.map((category, idx) => (
-              <Card key={idx} className="p-6" darkMode={darkMode}>
+              <Card key={idx} className="p-6" darkMode={darkMode} currentTheme={theme}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-lg" style={{ backgroundColor: darkMode ? `${THEME.dark.button}20` : `${THEME.light.button}20`, color: darkMode ? THEME.dark.button : THEME.light.button }}>
+                  <div className="p-2 rounded-lg" style={{ backgroundColor: `${theme.button}20`, color: theme.button }}>
                     {category.icon}
                   </div>
                   <h4 className="font-bold text-lg" style={textHeadStyle}>{category.category}</h4>
@@ -56,9 +57,9 @@ const About = ({ darkMode, profile, skills }) => {
                   {category.skills.map((skill, sIdx) => (
                     <span key={sIdx} className="px-3 py-1 rounded-full text-sm font-medium border"
                           style={{ 
-                            backgroundColor: darkMode ? THEME.dark.bg : THEME.light.bg,
-                            color: darkMode ? THEME.dark.paragraph : THEME.light.paragraph,
-                            borderColor: darkMode ? `${THEME.dark.paragraph}30` : `${THEME.light.paragraph}30`
+                            backgroundColor: theme.bg,
+                            color: theme.paragraph,
+                            borderColor: `${theme.paragraph}30`
                           }}>
                       {skill}
                     </span>
