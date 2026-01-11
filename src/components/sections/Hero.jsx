@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Code2, Mail, Download, ChevronDown, Github } from "lucide-react";
 import { THEME } from "../../constants/theme";
+import WavingHand from "../common/WavingHand";
 
 const Hero = ({ darkMode, profile, scrollToSection, currentTheme }) => {
+  const [showCVModal, setShowCVModal] = useState(false);
+  
   const theme = currentTheme || (darkMode ? THEME.dark : THEME.light);
   const textHeadStyle = {
     color: theme.headline,
@@ -13,6 +16,11 @@ const Hero = ({ darkMode, profile, scrollToSection, currentTheme }) => {
   const btnStyle = {
     backgroundColor: theme.button,
     color: theme.buttonText,
+  };
+  
+  const handleDownloadCV = (e) => {
+    e.preventDefault();
+    setShowCVModal(true);
   };
 
   return (
@@ -64,9 +72,8 @@ const Hero = ({ darkMode, profile, scrollToSection, currentTheme }) => {
             Ver Proyectos
           </button>
 
-          <a
-            href={profile.cv}
-            download
+          <button
+            onClick={handleDownloadCV}
             className="px-8 py-3.5 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 shadow-lg border hover:translate-y-[-2px]"
             style={{
               backgroundColor: theme.card,
@@ -76,7 +83,7 @@ const Hero = ({ darkMode, profile, scrollToSection, currentTheme }) => {
           >
             <Download size={20} />
             Descargar CV
-          </a>
+          </button>
           <a
             href="https://github.com/yKoutl"
             target="_blank"
@@ -138,6 +145,49 @@ const Hero = ({ darkMode, profile, scrollToSection, currentTheme }) => {
           />
         </path>
       </svg>
+
+      {/* Modal de CV en actualización */}
+      {showCVModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowCVModal(false)}
+          />
+          <div 
+            className="relative max-w-md w-full p-6 rounded-xl shadow-2xl text-center animate-scale-in"
+            style={{ backgroundColor: theme.card }}
+          >
+            <div 
+              className="text-5xl mb-4"
+              style={{ color: theme.button }}
+            >
+              📄
+            </div>
+            <h3 
+              className="text-2xl font-bold mb-3"
+              style={{ color: theme.headline }}
+            >
+              CV en actualización
+            </h3>
+            <p 
+              className="mb-6"
+              style={{ color: theme.paragraph }}
+            >
+              Por el momento mi CV está siendo actualizado. Pronto estará disponible para descargar.
+            </p>
+            <button
+              onClick={() => setShowCVModal(false)}
+              className="px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: theme.button,
+                color: theme.buttonText,
+              }}
+            >
+              Entendido
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

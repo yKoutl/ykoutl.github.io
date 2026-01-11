@@ -9,6 +9,7 @@ import Experience from '../components/sections/Experience';
 import Projects from '../components/sections/Projects';
 import Contact from '../components/sections/Contact';
 import AIChatWidget from '../components/common/AIChatWidget';
+import WelcomeModal from '../components/common/WelcomeModal';
 
 const PortfolioScreen = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -20,6 +21,7 @@ const PortfolioScreen = () => {
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   
   // Cargar datos desde localStorage o usar los iniciales
   const [data, setData] = useState(() => {
@@ -43,6 +45,18 @@ const PortfolioScreen = () => {
     localStorage.setItem('lightTheme', lightTheme);
     localStorage.setItem('darkTheme', darkTheme);
   }, [lightTheme, darkTheme]);
+
+  // Mostrar modal de bienvenida cada vez que se actualiza la página si no ha dado like
+  useEffect(() => {
+    const hasLiked = localStorage.getItem('portfolio_liked');
+    if (!hasLiked) {
+      // Esperar un poco antes de mostrar el modal
+      const timer = setTimeout(() => {
+        setShowWelcomeModal(true);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   // Recargar datos cuando cambie localStorage
   useEffect(() => {
@@ -71,6 +85,14 @@ const PortfolioScreen = () => {
 
   return (
     <div className="min-h-screen transition-colors duration-300 font-sans" style={bgStyle}>
+      {/* Modal de bienvenida */}
+      <WelcomeModal
+        isOpen={showWelcomeModal}
+        onClose={() => setShowWelcomeModal(false)}
+        profile={data.profile}
+        theme={currentTheme}
+      />
+      
       <Navbar 
         darkMode={darkMode} 
         setDarkMode={setDarkMode}

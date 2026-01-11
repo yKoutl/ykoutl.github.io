@@ -13,7 +13,7 @@ const About = ({ darkMode, profile, skills, currentTheme }) => {
     <section id="about" className="py-16" style={{ backgroundColor: `${theme.card}50` }}>
      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle id="about-title" darkMode={darkMode}>Sobre Mí & Habilidades</SectionTitle>
+        <SectionTitle id="about-title" darkMode={darkMode} currentTheme={theme}>Sobre Mí & Habilidades</SectionTitle>
         
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* About Text */}

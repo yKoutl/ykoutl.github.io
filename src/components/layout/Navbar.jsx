@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sun, Moon, Menu, X, Palette } from 'lucide-react';
 import { THEME } from '../../constants/theme';
+import StatsBadge from '../common/StatsBadge';
 
 const Navbar = ({ darkMode, setDarkMode, lightTheme, setLightTheme, darkTheme, setDarkTheme, isMenuOpen, setIsMenuOpen, activeSection, scrollToSection, alias }) => {
   const [showThemeSelector, setShowThemeSelector] = useState(false);
@@ -36,12 +37,19 @@ const Navbar = ({ darkMode, setDarkMode, lightTheme, setLightTheme, darkTheme, s
          }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div 
-            className="flex-shrink-0 font-bold text-2xl tracking-tighter cursor-pointer font-mono hover:scale-105 transition-transform" 
-            onClick={() => scrollToSection('home')}
-            style={{ color: currentTheme.button }}
-          >
-            &lt;{alias} /&gt;
+          <div className="flex items-center gap-4">
+            <div 
+              className="flex-shrink-0 font-bold text-lg sm:text-2xl tracking-tighter cursor-pointer font-mono hover:scale-105 transition-transform" 
+              onClick={() => scrollToSection('home')}
+              style={{ color: currentTheme.button }}
+            >
+              &lt;{alias} /&gt;
+            </div>
+            
+            {/* Stats Badge - Desktop */}
+            <div className="hidden md:block">
+              <StatsBadge currentTheme={currentTheme} />
+            </div>
           </div>
           
           {/* Desktop Menu */}
@@ -121,6 +129,9 @@ const Navbar = ({ darkMode, setDarkMode, lightTheme, setLightTheme, darkTheme, s
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
+            {/* Stats Badge - Mobile */}
+            <StatsBadge currentTheme={currentTheme} />
+            
             <button 
               onClick={() => setShowThemeSelector(!showThemeSelector)}
               className="p-2 rounded-full"
