@@ -43,10 +43,14 @@ const About = ({ darkMode, profile, skills, currentTheme }) => {
             </div>
           </div>
 
-          {/* Skills Grid */}
+         {/* Skills Grid */}
           <div className="grid gap-6">
             {skills.map((category, idx) => (
-              <Card key={idx} className="p-6" darkMode={darkMode} currentTheme={theme}>
+              <div key={idx} className="p-6 rounded-xl border backdrop-blur-sm"
+                   style={{ 
+                     backgroundColor: `${theme.card}80`,
+                     borderColor: `${theme.paragraph}20`
+                   }}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 rounded-lg" style={{ backgroundColor: `${theme.button}20`, color: theme.button }}>
                     {category.icon}
@@ -65,7 +69,7 @@ const About = ({ darkMode, profile, skills, currentTheme }) => {
                     </span>
                   ))}
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>

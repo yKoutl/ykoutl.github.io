@@ -3,7 +3,7 @@ import { Sun, Moon, Menu, X, Palette } from 'lucide-react';
 import { THEME } from '../../constants/theme';
 import StatsBadge from '../common/StatsBadge';
 
-const Navbar = ({ darkMode, setDarkMode, lightTheme, setLightTheme, darkTheme, setDarkTheme, isMenuOpen, setIsMenuOpen, activeSection, scrollToSection, alias }) => {
+const Navbar = ({ darkMode, setDarkMode, lightTheme, setLightTheme, darkTheme, setDarkTheme, isMenuOpen, setIsMenuOpen, activeSection, scrollToSection, alias, onLogoClick }) => {
   const [showThemeSelector, setShowThemeSelector] = useState(false);
   
   const currentTheme = darkMode ? THEME[darkTheme] : THEME[lightTheme];
@@ -40,7 +40,9 @@ const Navbar = ({ darkMode, setDarkMode, lightTheme, setLightTheme, darkTheme, s
           <div className="flex items-center gap-4">
             <div 
               className="flex-shrink-0 font-bold text-lg sm:text-2xl tracking-tighter cursor-pointer font-mono hover:scale-105 transition-transform" 
-              onClick={() => scrollToSection('home')}
+              onClick={() => {
+                onLogoClick ? onLogoClick() : scrollToSection('home');
+              }}
               style={{ color: currentTheme.button }}
             >
               &lt;{alias} /&gt;

@@ -3,6 +3,7 @@ import { Mail, Linkedin, Send } from 'lucide-react';
 import { THEME } from '../../constants/theme';
 import SectionTitle from '../common/SectionTitle';
 import Card from '../common/Card';
+import AnimatedBackground from '../common/AnimatedBackground';
 
 const Contact = ({ darkMode, profile, currentTheme }) => {
   const theme = currentTheme || (darkMode ? THEME.dark : THEME.light);
@@ -11,7 +12,8 @@ const Contact = ({ darkMode, profile, currentTheme }) => {
   const btnStyle = { backgroundColor: theme.button, color: theme.buttonText };
 
   return (
-    <section id="contact" className="py-20" style={bgStyle}>
+    <section id="contact" className="py-20 relative" style={bgStyle}>
+      <AnimatedBackground darkMode={darkMode} currentTheme={theme} sectionId="contact" />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="100%">
         <path fill={theme.button}>
           <animate
@@ -30,13 +32,13 @@ const Contact = ({ darkMode, profile, currentTheme }) => {
         </path>
       </svg>
 
-      <div className="max-w-4xl mx-auto px-4 text-center">
+      <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
         <SectionTitle id="contact-title" darkMode={darkMode} currentTheme={theme}>Hablemos</SectionTitle>
         <p className="text-xl mb-10 max-w-2xl mx-auto" style={textParaStyle}>
           Disponible para colaboraciones y nuevas oportunidades profesionales.
         </p>
 
-        <Card className="max-w-xl mx-auto p-8" darkMode={darkMode} currentTheme={theme}>
+        <div className="max-w-xl mx-auto p-8 rounded-xl shadow-md border" style={{ backgroundColor: theme.card, borderColor: `${theme.button}20` }}>
           <form className="space-y-4 text-left" onSubmit={(e) => e.preventDefault()}>
             <div>
               <label className="block text-sm font-medium mb-1" style={textParaStyle}>Nombre</label>
@@ -85,7 +87,7 @@ const Contact = ({ darkMode, profile, currentTheme }) => {
               <Send size={18} /> Enviar Mensaje
             </button>
           </form>
-        </Card>
+        </div>
 
         <div className="mt-12 flex justify-center gap-8">
           <a href={`mailto:${profile.email}`} className="flex flex-col items-center gap-2 transition-colors hover:opacity-80" style={textParaStyle}>

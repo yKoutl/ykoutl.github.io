@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
 import Experience from '../components/sections/Experience';
+import Education from '../components/sections/Education';
 import Projects from '../components/sections/Projects';
 import Contact from '../components/sections/Contact';
 import AIChatWidget from '../components/common/AIChatWidget';
@@ -105,11 +106,13 @@ const PortfolioScreen = () => {
         activeSection={activeSection}
         scrollToSection={scrollToSection}
         alias={data.profile.alias}
+        onLogoClick={() => setShowWelcomeModal(true)}
       />
       
       <Hero darkMode={darkMode} profile={data.profile} scrollToSection={scrollToSection} currentTheme={currentTheme} />
       <About darkMode={darkMode} profile={data.profile} skills={data.skills} currentTheme={currentTheme} />
       <Experience darkMode={darkMode} experience={data.experience} currentTheme={currentTheme} />
+      <Education darkMode={darkMode} education={data.education} currentTheme={currentTheme} />
       <Projects darkMode={darkMode} projects={data.projects} currentTheme={currentTheme} />
       <Contact darkMode={darkMode} profile={data.profile} currentTheme={currentTheme} />
       <Footer darkMode={darkMode} name={data.profile.name} currentTheme={currentTheme} />
