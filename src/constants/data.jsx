@@ -5,7 +5,7 @@ import { Code2, BarChart, Network, Database } from 'lucide-react';
 export const DATA = {
   profile: {
     name: "Raul Quintana",
-    alias: "ykoutl",
+    alias: "antonella negra",
     role: "Programador Junior",
     tagline: "Estudiante de Ingeniería Informática enfocado en el desarrollo web y gestión de bases de datos.",
     about: "Soy un profesional técnico que disfruta profundizando en cómo funcionan las cosas. Mi enfoque combina la lógica estructurada del desarrollo de software con la precisión analítica de la ciencia de datos. Actualmente, estoy obsesionado con la infraestructura de redes y la ciberseguridad, buscando esa intersección donde el hardware se encuentra con el algoritmo.",
