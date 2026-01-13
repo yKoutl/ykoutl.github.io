@@ -12,8 +12,8 @@ const Contact = ({ darkMode, profile, currentTheme }) => {
   const btnStyle = { backgroundColor: theme.button, color: theme.buttonText };
 
   return (
-    <section id="contact" className="py-20 relative" style={bgStyle}>
-      <AnimatedBackground darkMode={darkMode} currentTheme={theme} sectionId="contact" />
+    <section id="contact" className="py-20 relative overflow-hidden" style={bgStyle}>
+      <AnimatedBackground darkMode={darkMode} currentTheme={theme} />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="100%">
         <path fill={theme.button}>
           <animate

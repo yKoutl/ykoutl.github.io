@@ -171,6 +171,19 @@ export const DATA = {
       role: "Frontend Developer & UI Designer",
       inDevelopment: true,
       location: "Lima, Perú"
+    },
+    {
+      id: 7,
+      title: "Plataforma Web para la Gestión Deportiva – Escuela A.C. Milan VMT",
+      description: "Proyecto web de la Escuela Deportiva Milan, desarrollado en React + Vite, con integración de Firebase, Tailwind CSS y despliegue en Vercel. Incluye autenticación, gestión de contenido e interfaz moderna lista para producción.",
+      tags: ["React", "Tailwind CSS", "Firebase", "Cloud", "Web Development"],
+      link: "https://escuela-milan-vmt.vercel.app/",
+      github: "https://github.com/yKoutl/escuela-milan-vmt",
+      image: "https://i.postimg.cc/tCZqtR4H/milanpage.png",
+      color: "from-gray-400 to-gray-600",
+      year: "2026",
+      role: "Founder & F.S.Developer",
+      location: "Lima, Perú"
     }
   ],
   

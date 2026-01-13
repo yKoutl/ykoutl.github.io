@@ -11,8 +11,8 @@ const Experience = ({ darkMode, experience, currentTheme }) => {
   const textParaStyle = { color: theme.paragraph };
 
   return (
-    <section id="experience" className="py-20 relative" style={bgStyle}>
-      <AnimatedBackground darkMode={darkMode} currentTheme={theme} sectionId="experience" />
+    <section id="experience" className="py-20 relative overflow-hidden" style={bgStyle}>
+      <AnimatedBackground darkMode={darkMode} currentTheme={theme} />
       <div className="max-w-4xl mx-auto px-4 relative z-10">
         <SectionTitle id="exp-title" darkMode={darkMode} currentTheme={theme}>Experiencia Laboral</SectionTitle>
         
